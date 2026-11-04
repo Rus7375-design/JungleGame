@@ -78,11 +78,13 @@ public class Player2D : MonoBehaviour
 
     public void Fire()
     {
+        if (Time.timeScale == 0f) return;
         shooter.Shoot();
     }
 
     public void Jump()
     {
+        if (Time.timeScale == 0f) return;
         if (!onGround) return;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         src.PlayOneShot(jumpClip);
