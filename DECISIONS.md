@@ -14,4 +14,4 @@
 
 2026-11-11  Review found that player bullets never damaged the Charger (Bullet.cs only checked Patrol and EnemyShooter). Added the Charger there too, so it dies after 3 hits. Also made enemies start an attack only when they are inside the camera view (no attacks from off-screen).
 
-2026-11-12  Playtest:  Sayat 2 tries, Erman 3 tries. Changed Wind UP  0.7  -> 0.9 and cooldown 1.5 -> 2.0. Now 3 tries.
+2026-11-12  Playtest:  Sayat 2 tries, Erman 3 tries. Changed Wind UP  0.7  -> 0.9 and cooldown 1.5 -> 2.0. Now 2 tries.
