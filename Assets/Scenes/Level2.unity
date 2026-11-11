@@ -2823,7 +2823,7 @@ GameObject:
   - component: {fileID: 1211585081}
   - component: {fileID: 1211585080}
   - component: {fileID: 1211585079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundTiles
   m_TagString: Ground
   m_Icon: {fileID: 0}
