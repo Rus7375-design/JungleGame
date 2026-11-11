@@ -26,4 +26,10 @@ public class Shooter : MonoBehaviour
         Instantiate(bulletPrefab, transform.position, rot);
         src.PlayOneShot(shootClip);
     }
+
+    bool OnScreen()
+    {
+        Vector3 v = Camera.main.WorldToViewportPoint(transform.position);
+        return v.x > 0.02f && v.x < 0.98f && v.y > 0.02f && v.y < 0.98f;
+    }
 }

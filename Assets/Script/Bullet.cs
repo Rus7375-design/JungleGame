@@ -25,10 +25,20 @@ public class Bullet : MonoBehaviour
             boss.TakeHit();
             Destroy(gameObject);
         }
-        else if (other.GetComponent<Patrol>() != null || other.GetComponent<EnemyShooter>() != null)
+        else if (other.TryGetComponent(out Patrol patrol))
         {
-            Destroy(other.gameObject);   
-            Destroy(gameObject);         
+            patrol.OnShot();
+            Destroy(gameObject);
+        }
+        else if (other.TryGetComponent(out EnemyShooter shooter))
+        {
+            shooter.OnShot();
+            Destroy(gameObject);
+        }
+        else if (other.TryGetComponent(out Charger charger))
+        {
+            charger.OnShot();
+            Destroy(gameObject);
         }
 
     }

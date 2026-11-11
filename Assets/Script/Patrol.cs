@@ -92,6 +92,12 @@ public class Patrol : MonoBehaviour
         return Mathf.Abs(d.x) < range && Mathf.Abs(d.y) < 1f;
     }
 
+    bool OnScreen()
+    {
+        Vector3 v = Camera.main.WorldToViewportPoint(transform.position);
+        return v.x > 0.02f && v.x < 0.98f && v.y > 0.02f && v.y < 0.98f;
+    }
+
     void MoveX(float targetX, float speed)
     {
         Vector3 p = transform.position;
