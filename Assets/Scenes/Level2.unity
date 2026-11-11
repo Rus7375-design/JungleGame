@@ -1937,11 +1937,17 @@ MonoBehaviour:
   walls:
     serializedVersion: 2
     m_Bits: 64
-  windUp: 0.7
+  windUp: 0.9
   dashSpeed: 9
   dashTime: 0.6
   stun: 1
+  returnSpeed: 3
   hp: 3
+  idleSprite: {fileID: 0}
+  arrow: {fileID: 0}
+  arrowOffset: 0.12
+  breathSpeed: 6
+  breathSize: 0.04
 --- !u!95 &699113893
 Animator:
   serializedVersion: 7
@@ -2672,7 +2678,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1055308902222699064, guid: 5600d1b224027ce49bf0b2da49108806, type: 3}
   laser: {fileID: 1093249204}
   aimTime: 0.6
-  cooldown: 1.5
+  cooldown: 2
   hp: 1
 --- !u!61 &1093249203
 BoxCollider2D:
