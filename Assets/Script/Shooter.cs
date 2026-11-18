@@ -3,7 +3,7 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public float cooldown = 0.3f;
+    public PlayerStats stats;
     public AudioClip shootClip;
     float nextShot;
     SpriteRenderer sr;
@@ -18,7 +18,7 @@ public class Shooter : MonoBehaviour
     public void Shoot()
     {
         if (Time.time < nextShot) return;
-        nextShot = Time.time + cooldown;
+        nextShot = Time.time + stats.shootCooldown;
 
         bool faceRight = sr.flipX;
         Quaternion rot = faceRight ? Quaternion.identity : Quaternion.Euler(0, 0, 180);

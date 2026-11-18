@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    public int hp = 3;
-    public int maxHp = 3;
+    public PlayerStats stats;
+    public int hp;
+    public int maxHp => stats.maxHp;
     public AudioClip hurtClip;
     public AudioClip healClip;
 
@@ -18,12 +19,12 @@ public class Health : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         src = GetComponent<AudioSource>();
         GameState.BeginLevel(SceneManager.GetActiveScene().name, maxHp);
-        hp = GameState.hp;
+        hp = GameState.hp < 0 ? maxHp : GameState.hp;
     }
 
     public void TakeDamage(int dmg)
     {
-        if (invincible) return;       
+        if (invincible) return;
 
         hp -= dmg;
         GameState.hp = hp;
@@ -39,7 +40,7 @@ public class Health : MonoBehaviour
 
     public void Heal(int amount)
     {
-        hp = Mathf.Min(hp + amount, maxHp);  
+        hp = Mathf.Min(hp + amount, maxHp);
         GameState.hp = hp;
         src.PlayOneShot(healClip);
     }
@@ -47,10 +48,10 @@ public class Health : MonoBehaviour
     IEnumerator Invincibility()
     {
         invincible = true;
-        for (int i = 0; i < 10; i++)              
+        for (int i = 0; i < stats.blinkCount; i++)
         {
-            sr.enabled = !sr.enabled;       
-            yield return new WaitForSeconds(0.2f); 
+            sr.enabled = !sr.enabled;
+            yield return new WaitForSeconds(stats.blinkInterval);
         }
         sr.enabled = true;
         invincible = false;

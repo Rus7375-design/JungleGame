@@ -430,8 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e216e5ea5646eb45ac3bb3628edac17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player2D
-  speed: 7
-  jumpForce: 12
+  stats: {fileID: 11400000, guid: 2762485735899cf49881a4ba098bf0af, type: 2}
   coinClip: {fileID: 8300000, guid: cf6d51616398d154b90588abc3d39656, type: 3}
   jumpClip: {fileID: 8300000, guid: dc05261fa493d874499dce97f2c001a9, type: 3}
   gateAnimator: {fileID: 0}
@@ -471,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
   bulletPrefab: {fileID: 1055308902222699064, guid: 5a70ec3c60af630499291b3197fd081f, type: 3}
-  cooldown: 0.3
+  stats: {fileID: 11400000, guid: 2762485735899cf49881a4ba098bf0af, type: 2}
   shootClip: {fileID: 8300000, guid: c8eeef1abe68d3b408b7f9941952a5ef, type: 3}
 --- !u!114 &193014952
 MonoBehaviour:
@@ -485,8 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426f3b4e143f84448a7e9b60777b73e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
+  stats: {fileID: 11400000, guid: 2762485735899cf49881a4ba098bf0af, type: 2}
   hp: 3
-  maxHp: 3
   hurtClip: {fileID: 8300000, guid: 70346e1ea5c6b1944b1f5c72c091fe74, type: 3}
   healClip: {fileID: 8300000, guid: cf6d51616398d154b90588abc3d39656, type: 3}
 --- !u!82 &193014953

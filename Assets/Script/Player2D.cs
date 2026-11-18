@@ -4,8 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Player2D : MonoBehaviour
 {
-    public float speed = 7f;
-    public float jumpForce = 12f;
+    public PlayerStats stats;
     public AudioClip coinClip;
     public AudioClip jumpClip;
     public Animator gateAnimator;
@@ -53,7 +52,7 @@ public class Player2D : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(move.x * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(move.x * stats.speed, rb.linearVelocity.y);
     }
 
     public void OnMove(InputValue value)
@@ -86,7 +85,7 @@ public class Player2D : MonoBehaviour
     {
         if (Time.timeScale == 0f) return;
         if (!onGround) return;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, stats.jumpForce);
         src.PlayOneShot(jumpClip);
         onGround = false;
     }
@@ -132,6 +131,6 @@ public class Player2D : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
-            GetComponent<Health>().TakeDamage(1);
+            GetComponent<Health>().TakeDamage(stats.contactDamage);
     }
 }

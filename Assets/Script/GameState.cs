@@ -2,7 +2,7 @@ public static class GameState
 {
     public static int coins;       
     public static int available;   
-    public static int hp = 3;
+    public static int hp = -1;
 
     static int savedCoins, savedAvailable;
     static string lastScene = "";
@@ -25,6 +25,6 @@ public static class GameState
 
     public static void Reset()         
     {
-        coins = 0; available = 0; hp = 3; lastScene = "";
+        coins = 0; available = 0; hp = -1; lastScene = "";
     }
 }
