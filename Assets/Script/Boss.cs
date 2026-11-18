@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
-    public int hp = 10;
+    public BossStats stats;
     public Image hpBar;
-    int maxHp;
+    int hp;  
 
     void Start()
     {
-        maxHp = hp;
+        hp = stats.maxHp;
     }
 
     public void TakeHit()
@@ -18,13 +18,9 @@ public class Boss : MonoBehaviour
         hp--;
 
         if (hpBar != null)
-        {
-            hpBar.fillAmount = (float)hp / maxHp;
-        }
+            hpBar.fillAmount = (float)hp / stats.maxHp;
 
         if (hp <= 0)
-        {
             SceneManager.LoadScene("Win");
-        }
     }
 }

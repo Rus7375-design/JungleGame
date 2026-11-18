@@ -7,7 +7,7 @@ public class HeartPickup : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         Health h = other.GetComponent<Health>();
         if (h.hp >= h.maxHp) return;     
-        h.Heal(1);
+        h.Heal(h.stats.heartHeal);
         Destroy(gameObject);
     }
 }

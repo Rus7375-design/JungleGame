@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour
 {
+    public HazardStats stats;
+
     void Start()
     {
-        Destroy(gameObject, 10f);   
+        Destroy(gameObject, stats.lifetime);
     }
 
     void Update()
     {
-        if (transform.position.y < -12f) Destroy(gameObject);   
+        if (transform.position.y < stats.killY) Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D c)
@@ -27,16 +29,16 @@ public class Hazard : MonoBehaviour
 
     protected virtual void OnHitPlayer(Health player)
     {
-        player.TakeDamage(1);
+        player.TakeDamage(stats.damage);
     }
 
     protected virtual void OnHitGround()
     {
-        Destroy(gameObject);  
+        Destroy(gameObject);
     }
 
     public virtual void OnShot()
     {
-        Destroy(gameObject);   
+        Destroy(gameObject);
     }
 }

@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class ExplosionFx : MonoBehaviour
 {
-    public float lifetime = 0.4f;
-    public float grow = 10f;  
+    public HazardStats stats;
 
     void Start()
     {
-        Destroy(gameObject, lifetime);
+        Destroy(gameObject, stats.explosionLifetime);
     }
 
     void Update()
     {
-        transform.localScale += Vector3.one * grow * Time.deltaTime;
+        transform.localScale += Vector3.one * stats.explosionGrow * Time.deltaTime;
     }
 }

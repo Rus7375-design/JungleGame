@@ -2104,7 +2104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6243123d564a9545a9e5411b892b429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
-  hp: 10
+  stats: {fileID: 11400000, guid: 9468c5bf574110846bc32ccf10594796, type: 2}
   hpBar: {fileID: 1630336879}
 --- !u!61 &1008493196
 BoxCollider2D:
@@ -2164,12 +2164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c950a4de287034693737ff30fb240d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossAttack
+  stats: {fileID: 11400000, guid: 9468c5bf574110846bc32ccf10594796, type: 2}
   bulletPrefab: {fileID: 1055308902222699064, guid: 5600d1b224027ce49bf0b2da49108806, type: 3}
-  range: 14
-  cooldown: 1.5
-  bulletsPerVolley: 3
-  spread: 15
-  contactDamage: 1
 --- !u!1 &1035204623
 GameObject:
   m_ObjectHideFlags: 0

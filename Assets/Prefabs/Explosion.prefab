@@ -105,5 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d500ef4d0dff1584a86f772f4519a115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExplosionFx
-  lifetime: 0.4
-  grow: 10
+  stats: {fileID: 11400000, guid: 7ca6843568db91d4ba6a864920b62821, type: 2}
