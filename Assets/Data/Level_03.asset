@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50290e0177a8da84e81469d0e7df7b49, type: 3}
+  m_Name: Level_03
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelNumber: 3
+  levelName: Level 3
+  sceneName: Level3
+  timeLimit: 150
+  coinsRequired: 0
+  scorePerCoin: 100
+  bombInterval: 10
+  bombWarnTime: 3
+  bombStartDelay: 2
+  bombGroundY: -1.47
+  bombDropHeight: 10

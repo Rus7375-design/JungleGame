@@ -33,7 +33,7 @@ public class Player2D : MonoBehaviour
 
     void Start()
     {
-        coinsTotal = GameObject.FindGameObjectsWithTag("Coin").Length;
+        coinsTotal = LevelLoader.Instance.Data.coinsRequired;
         startCoins = GameState.coins;
         GameState.available += coinsTotal;
     }
@@ -96,6 +96,7 @@ public class Player2D : MonoBehaviour
         {
             Destroy(other.gameObject);
             GameState.coins++;
+            GameState.score += LevelLoader.Instance.Data.scorePerCoin;
             src.PlayOneShot(coinClip);
 
             if (GameState.coins - startCoins >= coinsTotal)

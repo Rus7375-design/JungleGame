@@ -3,49 +3,50 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public Hazard[] prefabs;           
-    public GameObject warningPrefab;   
-    public float interval = 10f;     
-    public float warnTime = 3f;        
-    public float groundY = -2f;        
+    public Hazard[] prefabs;
+    public GameObject warningPrefab;
 
     Transform player;
+    LevelData level;
 
     void Start()
     {
+        level = LevelLoader.Instance.Data;
+        if (level.bombInterval <= 0f) return;   
         player = GameObject.FindGameObjectWithTag("Player").transform;
         StartCoroutine(BombLoop());
     }
 
     IEnumerator BombLoop()
     {
-        yield return new WaitForSeconds(2f);   
+        yield return new WaitForSeconds(level.bombStartDelay);
 
         while (true)
         {
             if (player == null) yield break;
 
-            float x = player.position.x;     
+            float x = player.position.x;
             Hazard pick = prefabs[Random.Range(0, prefabs.Length)];
 
-            GameObject warn = Instantiate(warningPrefab, new Vector3(x, groundY, 0f), Quaternion.identity);
+            GameObject warn = Instantiate(warningPrefab,
+                new Vector3(x, level.bombGroundY, 0f), Quaternion.identity);
             SpriteRenderer sr = warn.GetComponent<SpriteRenderer>();
 
             float t = 0f;
-            while (t < warnTime)
+            while (t < level.bombWarnTime)
             {
                 t += Time.deltaTime;
-                float k = t / warnTime;                       
+                float k = t / level.bombWarnTime;
                 Color c = sr.color;
-                c.a = Mathf.Lerp(0.15f, 0.9f, k);              
+                c.a = Mathf.Lerp(0.15f, 0.9f, k);
                 sr.color = c;
                 yield return null;
             }
 
             Destroy(warn);
-            Instantiate(pick, new Vector3(x, 10f, 0f), Quaternion.identity);   
+            Instantiate(pick, new Vector3(x, level.bombDropHeight, 0f), Quaternion.identity);
 
-            yield return new WaitForSeconds(interval - warnTime);   
+            yield return new WaitForSeconds(Mathf.Max(0f, level.bombInterval - level.bombWarnTime));
         }
     }
 }
