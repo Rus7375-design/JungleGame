@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 12f;
+    public ProjectileStats stats;
 
     void Start()
     {
-        GetComponent<Rigidbody2D>().linearVelocity = transform.right * speed;
-        Destroy(gameObject, 3f);  
+        GetComponent<Rigidbody2D>().linearVelocity = transform.right * stats.speed;
+        Destroy(gameObject, stats.lifetime);
     }
     void OnTriggerEnter2D(Collider2D other)
     {

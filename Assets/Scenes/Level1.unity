@@ -1843,21 +1843,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4574898604b0c594bab74060796c9b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Patrol
+  stats: {fileID: 11400000, guid: c8039c8ea8f53ba48ae5ba5b1a7c64ac, type: 2}
   pointA: {fileID: 973264793}
   pointB: {fileID: 1351270692}
-  patrolSpeed: 1.5
-  chaseSpeed: 4.5
-  viewRange: 6
-  fov: 120
   walls:
     serializedVersion: 2
     m_Bits: 64
-  loseTime: 2
-  attackRange: 1.5
-  windUp: 0.5
-  recover: 0.7
-  damage: 1
-  hp: 1
 --- !u!1 &907024585
 GameObject:
   m_ObjectHideFlags: 0

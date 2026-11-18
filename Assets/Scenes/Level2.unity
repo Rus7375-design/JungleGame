@@ -1931,17 +1931,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d447d91509c16c408c8f370cc2f89b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Charger
-  triggerRange: 6
-  fov: 120
+  stats: {fileID: 11400000, guid: f39ee60d6eeeefe45868cb57c948567e, type: 2}
   walls:
     serializedVersion: 2
     m_Bits: 64
-  windUp: 0.9
-  dashSpeed: 9
-  dashTime: 0.6
-  stun: 1
-  returnSpeed: 3
-  hp: 3
   idleSprite: {fileID: 0}
   arrow: {fileID: 0}
   arrowOffset: 0.12
@@ -2666,19 +2659,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e7225e8bef3ea45be33eb8afea6461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
-  viewRange: 7
+  stats: {fileID: 11400000, guid: bb1f9df928f801b4cad3081e8c198bbd, type: 2}
   walls:
     serializedVersion: 2
     m_Bits: 64
-  keepDistance: 4
-  stepSpeed: 2
-  roam: 2
-  thinkTime: 0.5
   bulletPrefab: {fileID: 1055308902222699064, guid: 5600d1b224027ce49bf0b2da49108806, type: 3}
   laser: {fileID: 1093249204}
-  aimTime: 0.6
-  cooldown: 2
-  hp: 1
 --- !u!61 &1093249203
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3902,21 +3888,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4574898604b0c594bab74060796c9b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Patrol
+  stats: {fileID: 11400000, guid: c8039c8ea8f53ba48ae5ba5b1a7c64ac, type: 2}
   pointA: {fileID: 1565142081}
   pointB: {fileID: 237620954}
-  patrolSpeed: 1.5
-  chaseSpeed: 4.5
-  viewRange: 6
-  fov: 120
   walls:
     serializedVersion: 2
     m_Bits: 64
-  loseTime: 2
-  attackRange: 1.5
-  windUp: 0.5
-  recover: 0.7
-  damage: 1
-  hp: 1
 --- !u!95 &1262626549
 Animator:
   serializedVersion: 7

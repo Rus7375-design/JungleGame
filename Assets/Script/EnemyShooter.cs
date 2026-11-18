@@ -6,32 +6,27 @@ public class EnemyShooter : MonoBehaviour
     State state;
     float timer;
 
-    [Header("Seeing / moving")]
-    [SerializeField] float viewRange = 7f;        
-    [SerializeField] LayerMask walls;             
-    [SerializeField] float keepDistance = 4f;    
-    [SerializeField] float stepSpeed = 2f;      
-    [SerializeField] float roam = 2f;        
-    [SerializeField] float thinkTime = 0.5f;      
+    [Header("Data")]
+    [SerializeField] ShooterStats stats;
 
-    [Header("Attack")]
-    [SerializeField] GameObject bulletPrefab;     
-    [SerializeField] LineRenderer laser;          
-    [SerializeField] float aimTime = 0.6f;        
-    [SerializeField] float cooldown = 1.5f;       
-    [SerializeField] int hp = 1;
+    [Header("Scene setup")]
+    [SerializeField] LayerMask walls;
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] LineRenderer laser;
 
     Transform player;
     SpriteRenderer sr;
     Vector2 aimDir;
     float startX, nextLook;
     bool sees;
+    int hp;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         startX = transform.position.x;
+        hp = stats.maxHp;
         if (laser != null) { laser.positionCount = 2; laser.enabled = false; }
     }
 
@@ -45,15 +40,15 @@ public class EnemyShooter : MonoBehaviour
                 break;
 
             case State.Keep:
-                sr.flipX = player.position.x > transform.position.x; 
+                sr.flipX = player.position.x > transform.position.x;
                 float dx = player.position.x - transform.position.x;
-                if (Mathf.Abs(dx) < keepDistance) StepBack(dx);
+                if (Mathf.Abs(dx) < stats.keepDistance) StepBack(dx);
                 if (!CanSeePlayer()) SetState(State.Idle);
-                else if (timer >= thinkTime) SetState(State.Aim);
+                else if (timer >= stats.thinkTime) SetState(State.Aim);
                 break;
 
-            case State.Aim:                                               
-                if (timer >= aimTime)
+            case State.Aim:
+                if (timer >= stats.aimTime)
                 {
                     float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
                     Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, angle));
@@ -62,7 +57,7 @@ public class EnemyShooter : MonoBehaviour
                 break;
 
             case State.Cooldown:
-                if (timer >= cooldown) SetState(State.Keep);
+                if (timer >= stats.cooldown) SetState(State.Keep);
                 break;
         }
     }
@@ -72,17 +67,17 @@ public class EnemyShooter : MonoBehaviour
         if (Time.time < nextLook) return sees;
         nextLook = Time.time + 0.15f;
         Vector2 toPlayer = player.position - transform.position;
-        sees = toPlayer.magnitude <= viewRange                              
+        sees = toPlayer.magnitude <= stats.viewRange
             && !Physics2D.Raycast(transform.position, toPlayer.normalized,
-                                  toPlayer.magnitude, walls);              
+                                  toPlayer.magnitude, walls);
         return sees;
     }
 
     void StepBack(float dx)
     {
         Vector3 p = transform.position;
-        p.x += -Mathf.Sign(dx) * stepSpeed * Time.deltaTime;
-        p.x = Mathf.Clamp(p.x, startX - roam, startX + roam);
+        p.x += -Mathf.Sign(dx) * stats.stepSpeed * Time.deltaTime;
+        p.x = Mathf.Clamp(p.x, startX - stats.roam, startX + stats.roam);
         transform.position = p;
     }
 
@@ -94,11 +89,11 @@ public class EnemyShooter : MonoBehaviour
         sr.color = aim ? Color.red : Color.white;
         if (aim)
         {
-            aimDir = (player.position - transform.position).normalized;  
+            aimDir = (player.position - transform.position).normalized;
             if (laser != null)
             {
                 laser.SetPosition(0, transform.position);
-                laser.SetPosition(1, transform.position + (Vector3)aimDir * viewRange);
+                laser.SetPosition(1, transform.position + (Vector3)aimDir * stats.viewRange);
             }
         }
         if (laser != null) laser.enabled = aim;

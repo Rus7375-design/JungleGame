@@ -2,7 +2,7 @@
 
 # DECISIONS.md
 
-## Week 10: Enemy AI
+## Week 11: Content and Data
 
 2026-11-11  Patroller update: asked the agent for a patrol FSM (Patrol -> Chase -> WindUp -> Recover). The enemy now walks between two waypoints, checks the player with distance, angle and a Raycast on the Walls layer (walls block the view), runs after the player, and turns red during a 0.5 s wind-up before the melee hit. I moved all numbers (view range, speeds, wind-up, recover) into serialized fields.
 
@@ -15,3 +15,5 @@
 2026-11-11  Review found that player bullets never damaged the Charger (Bullet.cs only checked Patrol and EnemyShooter). Added the Charger there too, so it dies after 3 hits. Also made enemies start an attack only when they are inside the camera view (no attacks from off-screen).
 
 2026-11-12  Playtest:  Sayat 2 tries, Erman 3 tries. Changed Wind UP  0.7  -> 0.9 and cooldown 1.5 -> 2.0. Now 2 tries.
+
+2026-11-18 Kept current HP in Health.cs, asset only holds maxHp

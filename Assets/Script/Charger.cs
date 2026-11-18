@@ -6,18 +6,11 @@ public class Charger : MonoBehaviour
     State state;
     float timer;
 
-    [Header("Seeing")]
-    [SerializeField] float triggerRange = 6f;     // m
-    [SerializeField] float fov = 120f;            // degrees
-    [SerializeField] LayerMask walls;             // tick only Walls
+    [Header("Data")]
+    [SerializeField] ChargerStats stats;
 
-    [Header("Attack")]
-    [SerializeField] float windUp = 0.7f;         // s, red warning
-    [SerializeField] float dashSpeed = 9f;        // m/s
-    [SerializeField] float dashTime = 0.6f;       // s
-    [SerializeField] float stun = 1f;             // s, player's counter window
-    [SerializeField] float returnSpeed = 3f;      // m/s, walking back home
-    [SerializeField] int hp = 3;
+    [Header("Scene setup")]
+    [SerializeField] LayerMask walls;
 
     [Header("Look")]
     [SerializeField] Sprite idleSprite;
@@ -34,6 +27,7 @@ public class Charger : MonoBehaviour
     bool homeFlip;
     float nextLook;
     bool sees;
+    int hp;
 
     int Facing => sr.flipX ? 1 : -1;
 
@@ -45,6 +39,7 @@ public class Charger : MonoBehaviour
         baseScale = transform.localScale;
         homePos = transform.position;
         homeFlip = sr.flipX;
+        hp = stats.maxHp;
         SetState(State.Idle);
     }
 
@@ -58,23 +53,23 @@ public class Charger : MonoBehaviour
                 break;
 
             case State.WindUp:
-                if (timer >= windUp) SetState(State.Dash);
+                if (timer >= stats.windUp) SetState(State.Dash);
                 break;
 
             case State.Dash:
-                transform.position += Vector3.right * Facing * dashSpeed * Time.deltaTime;
-                if (timer >= dashTime || Blocked()) SetState(State.Stunned);
+                transform.position += Vector3.right * Facing * stats.dashSpeed * Time.deltaTime;
+                if (timer >= stats.dashTime || Blocked()) SetState(State.Stunned);
                 break;
 
             case State.Stunned:
-                if (timer >= stun) SetState(State.Return);
+                if (timer >= stats.stun) SetState(State.Return);
                 break;
 
             case State.Return:
             {
                 Vector3 p = transform.position;
                 if (Mathf.Abs(homePos.x - p.x) > 0.01f) sr.flipX = homePos.x > p.x;
-                p.x = Mathf.MoveTowards(p.x, homePos.x, returnSpeed * Time.deltaTime);
+                p.x = Mathf.MoveTowards(p.x, homePos.x, stats.returnSpeed * Time.deltaTime);
                 transform.position = p;
                 if (Mathf.Abs(p.x - homePos.x) < 0.05f)
                 {
@@ -103,8 +98,8 @@ public class Charger : MonoBehaviour
         nextLook = Time.time + 0.15f;
         Vector2 toPlayer = player.position - transform.position;
         sees = false;
-        if (toPlayer.magnitude > triggerRange) return false;
-        if (Vector2.Angle(Vector2.right * Facing, toPlayer) > fov / 2f) return false;
+        if (toPlayer.magnitude > stats.triggerRange) return false;
+        if (Vector2.Angle(Vector2.right * Facing, toPlayer) > stats.fov / 2f) return false;
         sees = !Physics2D.Raycast(transform.position, toPlayer.normalized,
                                   toPlayer.magnitude, walls);
         Debug.DrawRay(transform.position, toPlayer, sees ? Color.green : Color.red, 0.15f);
@@ -148,13 +143,14 @@ public class Charger : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        if (stats == null) return;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, triggerRange);
+        Gizmos.DrawWireSphere(transform.position, stats.triggerRange);
         int f = sr != null ? Facing : -1;
-        Vector3 l = Quaternion.Euler(0f, 0f, -fov / 2f) * (Vector3.right * f);
-        Vector3 r = Quaternion.Euler(0f, 0f,  fov / 2f) * (Vector3.right * f);
+        Vector3 l = Quaternion.Euler(0f, 0f, -stats.fov / 2f) * (Vector3.right * f);
+        Vector3 r = Quaternion.Euler(0f, 0f,  stats.fov / 2f) * (Vector3.right * f);
         Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(transform.position, l * triggerRange);
-        Gizmos.DrawRay(transform.position, r * triggerRange);
+        Gizmos.DrawRay(transform.position, l * stats.triggerRange);
+        Gizmos.DrawRay(transform.position, r * stats.triggerRange);
     }
 }
