@@ -16,7 +16,7 @@ MonoBehaviour:
   levelName: Level 1
   sceneName: Level1
   timeLimit: 90
-  coinsRequired: 3
+  coinsRequired: 1
   scorePerCoin: 100
   bombInterval: 0
   bombWarnTime: 3

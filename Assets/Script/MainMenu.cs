@@ -3,16 +3,23 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject levelSelectPanel;
+
     public void Play()
     {
-        GameState.Reset();
-        SceneManager.LoadScene("Level1");   
+        levelSelectPanel.SetActive(true);
+    }
+
+    public void CloseLevels()
+    {
+        levelSelectPanel.SetActive(false);
     }
 
     public void Quit()
     {
         Application.Quit();
     }
+
     public void BackToMenu()
     {
         SceneManager.LoadScene("MainMenu");
