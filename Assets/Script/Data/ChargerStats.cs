@@ -11,4 +11,6 @@ public class ChargerStats : ScriptableObject
     public float stun = 1f;
     public float returnSpeed = 3f;
     public int maxHp = 3;
+    public float wallCheckDistance = 0.8f;
+    public float groundCheckDistance = 1.5f;
 }

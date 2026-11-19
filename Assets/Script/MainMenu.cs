@@ -24,4 +24,11 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public GameObject settingsPanel;
+
+    public void OpenSettings()
+    {
+        settingsPanel.SetActive(true);
+    }
 }

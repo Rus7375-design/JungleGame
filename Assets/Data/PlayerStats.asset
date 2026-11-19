@@ -19,3 +19,5 @@ MonoBehaviour:
   blinkCount: 10
   blinkInterval: 0.2
   shootCooldown: 0.3
+  heartHeal: 1
+  fallDeathY: -10

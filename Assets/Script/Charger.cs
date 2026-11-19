@@ -109,9 +109,9 @@ public class Charger : MonoBehaviour
     bool Blocked()
     {
         Vector2 dir = Vector2.right * Facing;
-        Vector2 front = (Vector2)transform.position + dir * 0.8f;
-        bool wall = Physics2D.Raycast(transform.position, dir, 0.8f, walls);
-        bool ground = Physics2D.Raycast(front, Vector2.down, 1.5f, walls);
+        Vector2 front = (Vector2)transform.position + dir * stats.wallCheckDistance;
+        bool wall = Physics2D.Raycast(transform.position, dir, stats.wallCheckDistance, walls);
+        bool ground = Physics2D.Raycast(front, Vector2.down, stats.groundCheckDistance, walls);
         return wall || !ground;
     }
 

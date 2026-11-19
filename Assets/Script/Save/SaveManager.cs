@@ -35,17 +35,30 @@ public class SaveManager : MonoBehaviour
         Save();
     }
 
-    public void ResetToDefaults() => Data = new SaveData();
+    public void ResetToDefaults()
+    {
+        Data = new SaveData();
+        VolumeChanged?.Invoke();   
+    }
 
     void OnApplicationPause(bool paused)
     {
         if (paused) Save();
-            void OnApplicationQuit()
-        {
-            Save();
-        }
+    }
+
+    void OnApplicationQuit()
+    {
+        Save();
     }
 
     [ContextMenu("Save now")]
     void DebugSave() => Save();
+
+    public event System.Action VolumeChanged;
+
+    public void SetMusicVolume(float value)
+    {
+        Data.musicVol = Mathf.Clamp01(value);
+        VolumeChanged?.Invoke();
+    }
 }

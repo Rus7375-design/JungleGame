@@ -47,7 +47,7 @@ public class Player2D : MonoBehaviour
         if (move.x < 0) sr.flipX = false;
         else if (move.x > 0) sr.flipX = true;
 
-        if (transform.position.y < -10f)
+        if (transform.position.y < stats.fallDeathY)
             GetComponent<Health>().GameOver();
     }
 

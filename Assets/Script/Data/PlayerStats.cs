@@ -11,4 +11,5 @@ public class PlayerStats : ScriptableObject
     public float blinkInterval = 0.2f;  
     public float shootCooldown = 0.3f;
     public int heartHeal = 1; 
+    public float fallDeathY = -10f;   
 }
