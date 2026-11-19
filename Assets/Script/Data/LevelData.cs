@@ -19,4 +19,5 @@ public class LevelData : ScriptableObject
     public float bombStartDelay = 2f;
     public float bombGroundY = -2f;
     public float bombDropHeight = 10f;
+    public bool isFinalLevel;           
 }
