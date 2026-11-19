@@ -40,6 +40,10 @@ public class SaveManager : MonoBehaviour
     void OnApplicationPause(bool paused)
     {
         if (paused) Save();
+            void OnApplicationQuit()
+        {
+            Save();
+        }
     }
 
     [ContextMenu("Save now")]

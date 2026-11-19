@@ -6,7 +6,8 @@ public class Boss : MonoBehaviour
 {
     public BossStats stats;
     public Image hpBar;
-    int hp;  
+    int hp;
+    bool dead;
 
     void Start()
     {
@@ -15,12 +16,18 @@ public class Boss : MonoBehaviour
 
     public void TakeHit()
     {
+        if (dead) return;
+
         hp--;
 
         if (hpBar != null)
             hpBar.fillAmount = (float)hp / stats.maxHp;
 
         if (hp <= 0)
+        {
+            dead = true;
+            SaveManager.Instance.LevelCompleted(LevelLoader.Instance.Data);
             SceneManager.LoadScene("Win");
+        }
     }
 }

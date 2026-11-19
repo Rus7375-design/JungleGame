@@ -19,6 +19,7 @@ public class Player2D : MonoBehaviour
     Vector2 move;
     bool onGround;
     bool gateOpen;
+    bool levelDone;
     int coinsTotal;
     int startCoins;
 
@@ -106,8 +107,12 @@ public class Player2D : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Exit") && gateOpen)
+        if (other.CompareTag("Exit") && gateOpen && !levelDone)
+        {
+            levelDone = true;   
+            SaveManager.Instance.LevelCompleted(LevelLoader.Instance.Data);
             SceneManager.LoadScene(nextScene);
+        }
     }
 
     void OnCollisionStay2D(Collision2D other)
