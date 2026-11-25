@@ -17,8 +17,7 @@ public class LevelSelect : MonoBehaviour
         {
             bool open = save.IsUnlocked(levels[i].levelNumber);
             buttons[i].interactable = open;
-            buttons[i].GetComponentInChildren<TMP_Text>().text =
-                open ? levels[i].levelName : levels[i].levelName + " (locked)";
+            buttons[i].GetComponentInChildren<TMP_Text>().text = levels[i].levelName;
         }
 
         bestScoreText.text = "Best score: " + save.Data.bestScore;

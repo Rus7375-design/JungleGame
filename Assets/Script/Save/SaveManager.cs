@@ -61,4 +61,10 @@ public class SaveManager : MonoBehaviour
         Data.musicVol = Mathf.Clamp01(value);
         VolumeChanged?.Invoke();
     }
+
+    public void SetSfxVolume(float value)
+    {
+        Data.sfxVol = Mathf.Clamp01(value);
+        VolumeChanged?.Invoke();
+    }
 }

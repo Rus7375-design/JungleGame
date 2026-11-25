@@ -50,9 +50,27 @@ public class GameAudio : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    void Start()
+    {
+        if (Instance != this) return;
+        ApplyVolumes();                                  
+        SaveManager.Instance.VolumeChanged += ApplyVolumes;
+    }
+
+    void ApplyVolumes()
+    {
+        SaveData d = SaveManager.Instance.Data;
+        mixer.SetFloat("MusicVol", ToDb(d.musicVol));
+        mixer.SetFloat("SFXVol", ToDb(d.sfxVol));
+    }
+
+    public static float ToDb(float v) => Mathf.Log10(Mathf.Max(v, 0.0001f)) * 20f;
+
     void OnDestroy()
     {
-        if (Instance == this) SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (Instance != this) return;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (SaveManager.Instance != null) SaveManager.Instance.VolumeChanged -= ApplyVolumes;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

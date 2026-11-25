@@ -9,7 +9,8 @@ public class SaveData
     public int version = CurrentVersion;
     public int bestScore;
     public List<int> unlockedLevels = new List<int> { 1 };   
-    public float musicVol = 1f;                              
+    public float musicVol = 1f;       
+    public float sfxVol = 1f;                       
 
     public void Validate()
     {
@@ -17,5 +18,6 @@ public class SaveData
         if (!unlockedLevels.Contains(1)) unlockedLevels.Add(1);
         bestScore = Mathf.Max(0, bestScore);
         musicVol = Mathf.Clamp01(musicVol);
+        sfxVol = Mathf.Clamp01(sfxVol);
     }
 }

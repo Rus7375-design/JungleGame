@@ -1,5 +1,3 @@
-# JungleGame
-
 # DECISIONS.md
 
 ## Week 10: Enemy AI
@@ -39,3 +37,40 @@
 2026-11-19 SettingsScreen was missing from the function list, so I connected the settings buttons directly in the code using AddListener.
 
 2026-11-19 Reset now clears the save file, PlayerPrefs, GameState and saved data in memory. Before, old values stayed until the game was restarted.
+
+
+## Week 12: Sound Pass
+
+2026-11-25  Put every clip in one SoundBank asset, so code reads GameAudio.Bank and never a clip directly. Sounds with two versions are arrays.
+
+2026-11-25  Added an AudioMixer with Master, Music, SFX and UI. One GameAudio prefab holds three AudioSources, each routed to its group. It is created from Resources before the first scene, so every scene has sound.
+
+2026-11-25  Generated 10 effects and a menu loop with a Python script , so the license is clear. Normalised effects to a similar loudness as the old ones.
+
+2026-11-25  MusicVol and SFXVol are exposed, so the script owns those faders. Put the base music level and the pause effect on the child group Tracks instead.
+
+2026-11-25  Pitch belongs to the whole AudioSource, so random pitch would bend a warning that is still playing. Short effects use SfxVaried, long warnings use SfxFixed at pitch 1. Known limit: two short effects at once can still bend each other.
+
+2026-11-25  Replaced PlayClipAtPoint in BombHazard: it makes a temporary source outside the mixer, so the SFX slider would not control the explosion.
+
+2026-11-25  The wind-up sound starts in SetState, the same moment the enemy turns red, so the player hears the attack before it lands.
+
+2026-11-25  Wind-up sounds use pitch 1 so each enemy type keeps one recognizable sound. Death sounds use two clips with random pitch.
+
+2026-11-25  The death sound plays from GameAudio, not from the enemy, because the enemy is destroyed in the same frame.
+
+2026-11-25  Made one MusicManager with two AudioSources and a 1 s crossfade between menu and level music. It survives scene loads, and Play() ignores the clip that is already playing, so Level 1 - Level 2 does not restart the music.
+
+2026-11-25  The crossfade uses unscaledDeltaTime, so it also works while the game is paused.
+
+2026-11-25  Slider value 0-1 is converted with Log10 x 20 (minimum 0.0001, about -80 dB), because the mixer works in decibels. Volume is saved in save.json with the Week 11 SaveSystem and applied in GameAudio.Start().
+
+2026-11-25  Added a Paused snapshot on Tracks: -14 dB and a lowpass at 800 Hz. The mixer uses unscaled time, because at timeScale 0 the transition never finishes. PauseMenu returns to Normal in Resume, Restart and Menu, so the music never stays muffled after a scene change.
+
+2026-11-25  GameAudio adds the click sound to every Button when a scene loads, so I did not wire 16 buttons by hand and new buttons get it automatically.
+
+2026-11-25  Win and lose play from GameAudio, not from the scene, so the scene change does not cut them. The fatal hit plays only the lose sound, not hurt plus lose.
+
+2026-11-25  Added a gameOver flag to Health, because a hit and a fall in the same frame called GameOver twice.
+
+2026-11-25  Tested: changed the volume, closed the app, opened it again, the volume stayed. Pause softens the music, resume brings it back.

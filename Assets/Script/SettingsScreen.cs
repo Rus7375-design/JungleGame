@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class SettingsScreen : MonoBehaviour
 {
-    [SerializeField] Slider volumeSlider;
+    [SerializeField] Slider volumeSlider;  
+    [SerializeField] Slider sfxSlider;   
     [SerializeField] GameObject confirmPanel;
     [SerializeField] Button backButton;
     [SerializeField] Button resetButton;
@@ -14,6 +15,7 @@ public class SettingsScreen : MonoBehaviour
     void Awake()
     {
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        sfxSlider.onValueChanged.AddListener(OnSfxChanged);
         backButton.onClick.AddListener(Close);
         resetButton.onClick.AddListener(AskReset);
         yesButton.onClick.AddListener(ConfirmReset);
@@ -23,20 +25,34 @@ public class SettingsScreen : MonoBehaviour
     void OnEnable()
     {
         confirmPanel.SetActive(false);
+        ShowSaved();
+    }
+
+    void ShowSaved()
+    {
         volumeSlider.SetValueWithoutNotify(SaveManager.Instance.Data.musicVol);
+        sfxSlider.SetValueWithoutNotify(SaveManager.Instance.Data.sfxVol);
     }
 
     void OnVolumeChanged(float value)
     {
         SaveManager.Instance.SetMusicVolume(value);
-        CancelInvoke(nameof(SaveNow));
-        Invoke(nameof(SaveNow), saveDelay);   
+        SaveLater();
     }
 
-    void SaveNow()
+    void OnSfxChanged(float value)
     {
-        SaveManager.Instance.Save();
+        SaveManager.Instance.SetSfxVolume(value);
+        SaveLater();
     }
+
+    void SaveLater()
+    {
+        CancelInvoke(nameof(SaveNow));
+        Invoke(nameof(SaveNow), saveDelay);
+    }
+
+    void SaveNow() => SaveManager.Instance.Save();
 
     void Close()
     {
@@ -53,8 +69,7 @@ public class SettingsScreen : MonoBehaviour
         PlayerPrefs.DeleteAll();
         GameState.Reset();
         SaveManager.Instance.ResetToDefaults();
-
-        volumeSlider.SetValueWithoutNotify(SaveManager.Instance.Data.musicVol);
+        ShowSaved();
         confirmPanel.SetActive(false);
     }
 }
