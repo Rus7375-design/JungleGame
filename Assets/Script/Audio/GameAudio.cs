@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameAudio : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class GameAudio : MonoBehaviour
     [Header("Data")]
     public SoundBank bank;
     public AudioMixer mixer;
+
+    AudioMixerSnapshot normalSnap, pausedSnap;
 
     [Header("Sources (each one is routed to its mixer group in the prefab)")]
     [SerializeField] AudioSource sfxVaried;  
@@ -36,9 +40,31 @@ public class GameAudio : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }   
+        if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
-        DontDestroyOnLoad(gameObject);                           
+        DontDestroyOnLoad(gameObject);
+        gameObject.AddComponent<MusicManager>().Init(mixer);
+        mixer.updateMode = AudioMixerUpdateMode.UnscaledTime;  
+        normalSnap = mixer.FindSnapshot("Normal");
+        pausedSnap = mixer.FindSnapshot("Paused");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this) SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Button[] buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (Button b in buttons)
+            b.onClick.AddListener(PlayClick);
+    }
+
+    void PlayClick()
+    {
+        PlayUi(bank.uiClick);
     }
 
     public static void Play(AudioClip clip, bool vary = true, float volume = 1f)
@@ -57,6 +83,12 @@ public class GameAudio : MonoBehaviour
     {
         if (Instance == null || clip == null) return;
         Instance.ui.PlayOneShot(clip);
+    }
+
+    public static void SetPaused(bool paused)
+    {
+        if (Instance == null) return;
+        (paused ? Instance.pausedSnap : Instance.normalSnap).TransitionTo(0.3f);
     }
 
     void PlayNow(AudioClip clip, bool vary, float volume)

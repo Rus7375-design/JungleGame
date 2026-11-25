@@ -304,7 +304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &442045024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,9 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0281e46bbf356d14e9b54edf83539f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMusic
-  clip: {fileID: 8300000, guid: 43cd27dde3015ed4681a9ef6e0eec4cd, type: 3}
-  loop: 0
-  volume: 0.6
+  clip: {fileID: 8300000, guid: 232d2ef0f517cd247b37c476dbe11189, type: 3}
 --- !u!4 &442045025
 Transform:
   m_ObjectHideFlags: 0
@@ -1717,6 +1715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8eaefb0a53a8dc4d94e18d89baffdbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
+  levelSelectPanel: {fileID: 0}
+  settingsPanel: {fileID: 0}
 --- !u!1 &2086865847
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,7 @@ public class Boss : MonoBehaviour
         {
             dead = true;
             SaveManager.Instance.LevelCompleted(LevelLoader.Instance.Data);
+            GameAudio.Play(GameAudio.Bank.win, vary: false);
             SceneManager.LoadScene("Win");
         }
     }

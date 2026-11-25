@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public int maxHp => stats.maxHp;
 
     bool invincible;
+    bool gameOver;
     SpriteRenderer sr;
 
     void Awake()
@@ -24,13 +25,14 @@ public class Health : MonoBehaviour
 
         hp -= dmg;
         GameState.hp = hp;
-        GameAudio.Play(GameAudio.Bank.hurt);
 
         if (hp <= 0)
         {
             GameOver();
             return;
         }
+
+        GameAudio.Play(GameAudio.Bank.hurt);
         StartCoroutine(Invincibility());
     }
 
@@ -55,6 +57,9 @@ public class Health : MonoBehaviour
 
     public void GameOver()
     {
+        if (gameOver) return;
+        gameOver = true;
+        GameAudio.Play(GameAudio.Bank.lose, vary: false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

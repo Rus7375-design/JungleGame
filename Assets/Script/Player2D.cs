@@ -107,6 +107,7 @@ public class Player2D : MonoBehaviour
         {
             levelDone = true;   
             SaveManager.Instance.LevelCompleted(LevelLoader.Instance.Data);
+            GameAudio.Play(GameAudio.Bank.win, vary: false);            
             SceneManager.LoadScene(nextScene);
         }
     }
