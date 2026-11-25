@@ -86,6 +86,7 @@ public class EnemyShooter : MonoBehaviour
         state = next;
         timer = 0f;
         bool aim = next == State.Aim;
+        if (aim) GameAudio.Play(GameAudio.Bank.windupAim, vary: false);
         sr.color = aim ? Color.red : Color.white;
         if (aim)
         {
@@ -102,6 +103,10 @@ public class EnemyShooter : MonoBehaviour
     public void OnShot()
     {
         hp--;
-        if (hp <= 0) Destroy(gameObject);
+        if (hp <= 0)
+        {
+            GameAudio.Play(GameAudio.Bank.enemyDeath);
+            Destroy(gameObject);
+        }
     }
 }

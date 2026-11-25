@@ -126,6 +126,7 @@ public class Charger : MonoBehaviour
     {
         state = next;
         timer = 0f;
+        if (next == State.WindUp) GameAudio.Play(GameAudio.Bank.windupCharge, vary: false);
         if (next == State.WindUp) sr.color = Color.red;
         else if (next == State.Stunned) sr.color = Color.gray;
         else sr.color = Color.white;
@@ -138,7 +139,11 @@ public class Charger : MonoBehaviour
     public void OnShot()
     {
         hp--;
-        if (hp <= 0) Destroy(gameObject);
+        if (hp <= 0)
+        {
+            GameAudio.Play(GameAudio.Bank.enemyDeath);
+            Destroy(gameObject);
+        }
     }
 
     void OnDrawGizmosSelected()

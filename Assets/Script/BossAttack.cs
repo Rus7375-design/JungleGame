@@ -23,6 +23,8 @@ public class BossAttack : MonoBehaviour
         Vector2 dir = player.position - transform.position;
         float baseAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
+        GameAudio.Play(GameAudio.Bank.bossShot);
+
         for (int i = 0; i < stats.bulletsPerVolley; i++)
         {
             float offset = (i - (stats.bulletsPerVolley - 1) / 2f) * stats.spread;

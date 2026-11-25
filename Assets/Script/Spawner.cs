@@ -31,6 +31,7 @@ public class Spawner : MonoBehaviour
             GameObject warn = Instantiate(warningPrefab,
                 new Vector3(x, level.bombGroundY, 0f), Quaternion.identity);
             SpriteRenderer sr = warn.GetComponent<SpriteRenderer>();
+            GameAudio.Play(GameAudio.Bank.bombWarning, vary: false);
 
             float t = 0f;
             while (t < level.bombWarnTime)

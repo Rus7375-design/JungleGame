@@ -96,13 +96,18 @@ public class Patrol : MonoBehaviour
     {
         state = next;
         timer = 0f;
+        if (next == State.WindUp) GameAudio.Play(GameAudio.Bank.windupMelee, vary: false);
         sr.color = next == State.WindUp ? Color.red : Color.white;
     }
 
     public void OnShot()
     {
         hp--;
-        if (hp <= 0) Destroy(gameObject);
+         if (hp <= 0)
+        {
+            GameAudio.Play(GameAudio.Bank.enemyDeath);
+            Destroy(gameObject);
+        }
     }
 
     void OnDrawGizmosSelected()
