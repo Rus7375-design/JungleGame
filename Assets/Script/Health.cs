@@ -7,17 +7,13 @@ public class Health : MonoBehaviour
     public PlayerStats stats;
     public int hp;
     public int maxHp => stats.maxHp;
-    public AudioClip hurtClip;
-    public AudioClip healClip;
 
     bool invincible;
     SpriteRenderer sr;
-    AudioSource src;
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        src = GetComponent<AudioSource>();
         GameState.BeginLevel(SceneManager.GetActiveScene().name, maxHp);
         hp = GameState.hp < 0 ? maxHp : GameState.hp;
     }
@@ -28,7 +24,7 @@ public class Health : MonoBehaviour
 
         hp -= dmg;
         GameState.hp = hp;
-        src.PlayOneShot(hurtClip);
+        GameAudio.Play(GameAudio.Bank.hurt);
 
         if (hp <= 0)
         {
@@ -42,7 +38,7 @@ public class Health : MonoBehaviour
     {
         hp = Mathf.Min(hp + amount, maxHp);
         GameState.hp = hp;
-        src.PlayOneShot(healClip);
+        GameAudio.Play(GameAudio.Bank.pickup);
     }
 
     IEnumerator Invincibility()

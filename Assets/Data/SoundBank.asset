@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d09aaf0aaddf244b86403d0a2a81377, type: 3}
+  m_Name: SoundBank
+  m_EditorClassIdentifier: Assembly-CSharp::SoundBank
+  jump:
+  - {fileID: 8300000, guid: dc05261fa493d874499dce97f2c001a9, type: 3}
+  shoot:
+  - {fileID: 8300000, guid: c8eeef1abe68d3b408b7f9941952a5ef, type: 3}
+  pickup:
+  - {fileID: 8300000, guid: cf6d51616398d154b90588abc3d39656, type: 3}
+  hurt:
+  - {fileID: 8300000, guid: 70346e1ea5c6b1944b1f5c72c091fe74, type: 3}
+  - {fileID: 8300000, guid: f4500c82ab98b1447b138aac751e9ef2, type: 3}
+  windupMelee: {fileID: 8300000, guid: a40aed4e5e2af82448cc190bb1ad3ecd, type: 3}
+  windupCharge: {fileID: 8300000, guid: 147e0d5077f72274091d2a385614cb7e, type: 3}
+  windupAim: {fileID: 8300000, guid: 2b037de0507096a45b929901c4f75329, type: 3}
+  bombWarning: {fileID: 8300000, guid: 0ef5ec38226f58145a2a8473520cb3fd, type: 3}
+  bossShot: {fileID: 8300000, guid: 3f303c80ebda3434e8edb5c63270a512, type: 3}
+  enemyDeath:
+  - {fileID: 8300000, guid: b5e6e1d4d7c47de498032f04192e819d, type: 3}
+  - {fileID: 8300000, guid: 20ce7f6f83853fb4ea5de8c5a77f9812, type: 3}
+  explosion:
+  - {fileID: 8300000, guid: 1bdd377f8c4e0a1458a75ee4e10c92ad, type: 3}
+  uiClick: {fileID: 8300000, guid: ec13f36638205204485163c4902f418b, type: 3}
+  win: {fileID: 8300000, guid: 43cd27dde3015ed4681a9ef6e0eec4cd, type: 3}
+  lose: {fileID: 8300000, guid: 31e4373d4cfd1d048ac19b19459a0539, type: 3}
+  menuMusic: {fileID: 8300000, guid: 232d2ef0f517cd247b37c476dbe11189, type: 3}
+  levelMusic: {fileID: 8300000, guid: 79e58813231edbc4fabc132fa54635eb, type: 3}

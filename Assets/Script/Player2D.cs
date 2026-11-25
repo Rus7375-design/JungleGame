@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 public class Player2D : MonoBehaviour
 {
     public PlayerStats stats;
-    public AudioClip coinClip;
-    public AudioClip jumpClip;
     public Animator gateAnimator;
     public string nextScene;
 
@@ -14,7 +12,6 @@ public class Player2D : MonoBehaviour
     Animator anim;
     SpriteRenderer sr;
     Shooter shooter;
-    AudioSource src;
 
     Vector2 move;
     bool onGround;
@@ -28,7 +25,6 @@ public class Player2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        src = GetComponent<AudioSource>();
         shooter = GetComponent<Shooter>();
     }
 
@@ -87,7 +83,7 @@ public class Player2D : MonoBehaviour
         if (Time.timeScale == 0f) return;
         if (!onGround) return;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, stats.jumpForce);
-        src.PlayOneShot(jumpClip);
+        GameAudio.Play(GameAudio.Bank.jump);
         onGround = false;
     }
 
@@ -98,7 +94,7 @@ public class Player2D : MonoBehaviour
             Destroy(other.gameObject);
             GameState.coins++;
             GameState.score += LevelLoader.Instance.Data.scorePerCoin;
-            src.PlayOneShot(coinClip);
+            GameAudio.Play(GameAudio.Bank.pickup);
 
             if (GameState.coins - startCoins >= coinsTotal)
             {
